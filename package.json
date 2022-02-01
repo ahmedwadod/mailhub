@@ -1,0 +1,16 @@
+{
+  "name": "mailhub",
+  "version": "1.0.0",
+  "description": "A web API to send emails",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ahmed A. Elkhalifa",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^15.0.0",
+    "express": "^4.17.2",
+    "nodemailer": "^6.7.2"
+  }
+}
