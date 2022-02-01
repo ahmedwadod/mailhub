@@ -6,7 +6,7 @@ POST http://localhost:8080 HTTP/1.1
 Content-Type: application/json
 
 {
-    "from": "josh@josh.com",
-    "subject": "ahmed",
-    "query": "Hello there!"
+    "from": "example@example.com",
+    "subject": "Is it working",
+    "query": "Hello there!<br/>Is it working?"
 }

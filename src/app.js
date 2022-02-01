@@ -34,6 +34,7 @@ app.post('/',
         let mail = {
             from: process.env.SENDER_EMAIL,
             to: process.env.DEFAULT_RECIEVER,
+            replyTo: req.body["from"],
             subject: req.body["subject"],
             html: `<h6> Sent from Mailhub by Ahmed A. Elkhalifa </h6> <p>${req.body["query"]}</p>`
         }
