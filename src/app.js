@@ -7,18 +7,24 @@ const { body, validationResult } = require('express-validator');
 
 app.use(express.json())
 
-app.get('/', (req, res) => res.send('Hello'))
-
 let transpoerter = mailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
-    tls: process.env.USE_SSL ? {
-        rejectUnauthorized: false
-    } : null,
+    secure: process.env.USE_SSL == "true",
     auth: {
-        user: process.env.SENDER_EMAIL,
+        user: process.env.SENDER_USER,
         pass: process.env.SENDER_PASSWORD
     }
+})
+
+app.get('/', (req, res) => {
+    transpoerter.verify(function (error, success) {
+        if (error) {
+            res.status(500).send(error);
+        } else {
+            res.send("Server is ready to take our messages");
+        }
+    });
 })
 
 app.post('/',
@@ -40,7 +46,7 @@ app.post('/',
         }
 
         transpoerter.sendMail(mail).then((info) => {
-            res.status(200).send('Sent!')
+            res.status(200).send('Sent!').end()
         }).catch((err) => {
             res.status(500).json(err)
         })
